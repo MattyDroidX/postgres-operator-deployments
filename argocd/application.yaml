@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres-operator
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/mattydroidx/postgres-operator-deployments.git # ✅ Change this to your Git repo
+    targetRevision: main
+    path: apps/ # ✅ Change this if your YAML files are inside another folder
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default # ✅ Change to the namespace where your Operator runs
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
