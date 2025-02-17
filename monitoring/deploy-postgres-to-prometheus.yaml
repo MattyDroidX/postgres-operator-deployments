@@ -1,0 +1,22 @@
+config: {}
+
+extraArgs:
+  - "--extend.query-path=/etc/postgres_exporter/queries.yaml"
+
+extraVolumes:
+  - name: postgres-exporter-config
+    configMap:
+      name: postgres-exporter-config
+
+extraVolumeMounts:
+  - name: postgres-exporter-config
+    mountPath: /etc/postgres_exporter.yml
+    subPath: postgres_exporter.yml
+    readOnly: true
+
+extraEnv:
+  - name: DATA_SOURCE_NAME
+    valueFrom:
+      secretKeyRef:
+        name: postgres-exporter-secret
+        key: DATA_SOURCE_NAME

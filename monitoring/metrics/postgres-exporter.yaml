@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: postgres-servicemonitor
+  namespace: monitoring
+data:
+  postgres_exporter.yml: |
+    data_source_name: "postgresql://postgres:examplepassword@my-database-postgresql.default.svc.cluster.local:5432/?sslmode=disable"
+spec:
+  selector:
+    matchLabels:
+      app: postgres-exporter
+  endpoints:
+    - port: metrics
+      interval: 30s
+  namespaceSelector:
+    matchNames:
+      - default

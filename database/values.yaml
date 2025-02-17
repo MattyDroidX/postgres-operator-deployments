@@ -1,0 +1,31 @@
+config:
+  datasource:
+    user: "postgres"
+    pass: "examplepassword"
+    host: "my-database-postgresql.default.svc.cluster.local"
+    port: "5432"
+
+prometheus:
+  metrics: true
+  serviceMonitor:
+    enabled: true
+    additionalLabels:
+      release: prometheus-operator
+
+extraEnv:
+  - name: DATA_SOURCE_NAME
+    valueFrom:
+      secretKeyRef:
+        name: postgres-exporter-secret
+        key: DATA_SOURCE_NAME
+
+extraVolumes:
+  - name: postgres-exporter-config
+    configMap:
+      name: postgres-exporter-config
+
+extraVolumeMounts:
+  - name: postgres-exporter-config
+    mountPath: /etc/postgres_exporter.yml
+    subPath: postgres_exporter.yml
+    readOnly: true
