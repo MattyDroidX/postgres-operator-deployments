@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/mattydroidx/postgres-operator-deployments.git # ✅ Change this to your Git repo
+    repoURL: https://github.com/mattydroidx/postgres-operator-deployments.git
     targetRevision: main
-    path: apps/ # ✅ Change this if your YAML files are inside another folder
+    path: app/
   destination:
     server: https://kubernetes.default.svc
     namespace: default # ✅ Change to the namespace where your Operator runs
