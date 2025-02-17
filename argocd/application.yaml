@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/mattydroidx/postgres-operator-deployments.git
     targetRevision: main
-    path: apps/ # ✅ Ensure this is correct
+    path: app/ # ✅ Ensure this is correct
   destination:
     server: https://kubernetes.default.svc
     namespace: default
