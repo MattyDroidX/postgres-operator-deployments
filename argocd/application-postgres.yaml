@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: "https://github.com/MattyDroidX/postgres-operator-deployments.git"
     targetRevision: HEAD
-    path: database/
+    path: monitoring/postgres-exporter
   destination:
     server: "https://kubernetes.default.svc"
     namespace: monitoring

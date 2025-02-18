@@ -4,14 +4,11 @@ metadata:
   name: postgres-exporter
   namespace: monitoring
   labels:
-    release: monitoring-stack # Change this based on your Prometheus deployment
+    release: prometheus
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: prometheus-postgres-exporter
+      app: prometheus-postgres-exporter
   endpoints:
     - port: http
       interval: 30s
-  namespaceSelector:
-    matchNames:
-      - monitoring

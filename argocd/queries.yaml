@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-exporter-config
+  namespace: monitoring
+data:
+  queries.yaml: |
+    pg_database:
+      query: "SELECT datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit FROM pg_stat_database;"
+      metrics:
+        - datname:
+            usage: "LABEL"
+            description: "Name of the database"
+        - numbackends:
+            usage: "GAUGE"
+            description: "Number of backends"
+  postgres_exporter.yml: |
+    disable_settings_metrics: true
